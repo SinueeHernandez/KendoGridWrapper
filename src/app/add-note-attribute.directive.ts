@@ -14,6 +14,5 @@ export class AddNoteAttributeDirective implements AfterViewInit {
     this.el.nativeElement.querySelectorAll('[name]').forEach(element => {
       this.render.addClass(element, 'app-notes');
     });
-    // console.log(this.el.nativeElement.querySelectorAll('[name]'));
   }
 }
