@@ -1,18 +1,22 @@
-import { Directive, Renderer2, AfterViewInit, ElementRef } from '@angular/core';
+import { Directive, Renderer2, ElementRef, OnInit } from '@angular/core';
+import { TrigerNotesResolverService } from './triger-notes-resolver.service';
 
 @Directive({
   selector: '[appAddNoteAttribute]'
 })
-export class AddNoteAttributeDirective implements AfterViewInit {
+export class AddNoteAttributeDirective implements OnInit {
 
   constructor(
     private render: Renderer2,
-    private el: ElementRef
+    private el: ElementRef,
+    private trigerNotesResolver: TrigerNotesResolverService
   ) { }
 
-  ngAfterViewInit() {
-    this.el.nativeElement.querySelectorAll('[name]').forEach(element => {
-      this.render.addClass(element, 'app-notes');
-    });
+  ngOnInit() {
+    const listEl = this.el.nativeElement.querySelectorAll('[name]');
+    for (const element of listEl) {
+      this.render.setAttribute(element, 'appAnchorNotes', '');
+    }
+    this.trigerNotesResolver.finishDomModification.emit(true);
   }
 }

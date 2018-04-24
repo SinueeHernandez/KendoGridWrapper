@@ -9,20 +9,26 @@ import { NewAccountComponent } from './new-account/new-account.component';
 import { AccountsService } from './accounts.service';
 import { LoggingService } from './logging.service';
 import { AddNoteAttributeDirective } from './add-note-attribute.directive';
+import { AppNotesComponent } from './app-notes.component';
+import { AnchorNotesDirective } from './anchor-notes.directive';
+import { TrigerNotesResolverService } from './triger-notes-resolver.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccountComponent,
     NewAccountComponent,
-    AddNoteAttributeDirective
+    AddNoteAttributeDirective,
+    AppNotesComponent,
+    AnchorNotesDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [AccountsService, LoggingService],
-  bootstrap: [AppComponent]
+  providers: [AccountsService, LoggingService, TrigerNotesResolverService],
+  bootstrap: [AppComponent],
+  entryComponents: [AppNotesComponent]
 })
 export class AppModule { }
