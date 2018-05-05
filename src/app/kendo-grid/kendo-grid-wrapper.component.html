@@ -1,0 +1,32 @@
+<kendo-grid 
+[data]="gridView" 
+[height]="410"
+[sortable]="{
+    allowUnsort: allowUnsort,
+    mode: multiple ? 'multiple' : 'single'
+    }"
+  [sort]="sort"
+  (sortChange)="sortChange($event)"
+>
+<!-- <kendo-grid-column width="50"></kendo-grid-column> -->
+  <ng-template ngFor [ngForOf]="columns" let-column>
+    <kendo-grid-column  
+    *ngIf="column.dataType === dataTypeOption.string || column.dataType === dataTypeOption.number" 
+    [field]="column.columnName" 
+    [title]="column.columnDisplay"
+    [width]="column.width"
+    >
+    </kendo-grid-column>
+
+    <kendo-grid-column 
+    *ngIf="column.dataType === dataTypeOption.checkbox" 
+    [field]="column.columnName" 
+    [title]="column.columnDisplay" 
+    [width]="column.width"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input type="checkbox" [checked]="dataItem[column.columName]" />
+      </ng-template>
+    </kendo-grid-column>
+  </ng-template>
+</kendo-grid>
