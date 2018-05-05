@@ -59,8 +59,14 @@ export class AppComponent implements AfterViewInit {
         columnName: 'Discontinued',
         columnDisplay: 'Discontinued',
         dataType: DataTypeOption.checkbox,
-        width: 120,
+        width: 60,
         disabled: true
+      },
+      {
+        columnName: 'FirstOrderedOn',
+        columnDisplay: 'First Ordered On',
+        dataType: DataTypeOption.date,
+        width: 160
       }
     ];
   }

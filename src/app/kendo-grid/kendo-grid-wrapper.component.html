@@ -44,8 +44,14 @@
     [field]="column.columnName" 
     [title]="column.columnDisplay"
     [width]="column.width"
-    [filter]="column.dataType"
+    [filter]="dataTypeOption.date"
     >
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <kendo-datepicker
+                [(value)]="dataItem[column.columnName]"
+                [disabled]="column.disabled" 
+            ></kendo-datepicker>
+        </ng-template>
     </kendo-grid-column>
 
   </ng-template>

@@ -196,7 +196,8 @@ export const products = [{
         "CategoryID": 1,
         "CategoryName": "Beverages",
         "Description": "Soft drinks, coffees, teas, beers, and ales"
-    }
+    },
+    "FirstOrderedOn": new Date(1996, 8, 20)
 }, {
     "ProductID": 2,
     "ProductName": "Chang",

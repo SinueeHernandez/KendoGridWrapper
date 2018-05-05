@@ -15,6 +15,8 @@ import { AppNotesComponent } from './app-notes.component';
 import { AnchorNotesDirective } from './anchor-notes.directive';
 import { TrigerNotesResolverService } from './triger-notes-resolver.service';
 import { KendoGridWrapperComponent } from './kendo-grid/kendo-grid-wrapper.component';
+import { IntlModule } from '@progress/kendo-angular-intl';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { KendoGridWrapperComponent } from './kendo-grid/kendo-grid-wrapper.compo
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    GridModule
+    GridModule,
+    IntlModule,
+    DateInputsModule
   ],
   providers: [AccountsService, LoggingService, TrigerNotesResolverService],
   bootstrap: [AppComponent],
