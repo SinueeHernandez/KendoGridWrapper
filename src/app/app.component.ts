@@ -60,7 +60,7 @@ export class AppComponent implements AfterViewInit {
         columnDisplay: 'Discontinued',
         dataType: DataTypeOption.checkbox,
         width: 120,
-        disable: true
+        disabled: true
       }
     ];
   }

@@ -52,13 +52,13 @@ export class GridColumns {
     /** Tells the data type of your column use this to get the correct view. */
     dataType: DataTypeOption;
     width: number;
-    disable?: boolean;
+    disabled?: boolean;
 
     constructor() {
         this.columnDisplay = '';
         this.columnName = '';
         this.dataType = DataTypeOption.string;
-        this.disable = false;
+        this.disabled = false;
         this.width = 0;
     }
 }

@@ -25,7 +25,7 @@
     [width]="column.width"
     >
       <ng-template kendoGridCellTemplate let-dataItem>
-        <input type="checkbox" [checked]="dataItem[column.columName]" />
+        <input type="checkbox" [checked]="dataItem[column.columnName]" [disabled]="column.disabled" />
       </ng-template>
     </kendo-grid-column>
   </ng-template>
