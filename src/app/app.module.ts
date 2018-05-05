@@ -14,7 +14,7 @@ import { AddNoteAttributeDirective } from './add-note-attribute.directive';
 import { AppNotesComponent } from './app-notes.component';
 import { AnchorNotesDirective } from './anchor-notes.directive';
 import { TrigerNotesResolverService } from './triger-notes-resolver.service';
-import { KendoGridTestComponent } from './kendo-grid/kendo-grid-test.component';
+import { KendoGridWrapperComponent } from './kendo-grid/kendo-grid-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { KendoGridTestComponent } from './kendo-grid/kendo-grid-test.component';
     AddNoteAttributeDirective,
     AppNotesComponent,
     AnchorNotesDirective,
-    KendoGridTestComponent
+    KendoGridWrapperComponent
   ],
   imports: [
     BrowserModule,

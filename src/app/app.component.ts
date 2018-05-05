@@ -4,6 +4,7 @@ import { AccountsService } from './accounts.service';
 import { AnchorNotesDirective } from './anchor-notes.directive';
 import { AppNotesComponent } from './app-notes.component';
 import { TrigerNotesResolverService } from './triger-notes-resolver.service';
+import { products } from './kendo-grid/products';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements AfterViewInit {
   accounts: {name: string, status: string}[] = [];
   @ViewChild(AnchorNotesDirective) appAnchorNotes: AnchorNotesDirective;
 
+  products: any[] = products;
 
   constructor(
     private accountsService: AccountsService,
