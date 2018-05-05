@@ -28,7 +28,7 @@ export class AppComponent implements AfterViewInit {
       {
         columnName: 'ProductID',
         columnDisplay: 'Id',
-        dataType: DataTypeOption.string,
+        dataType: DataTypeOption.number,
         width: 40
       },
       {

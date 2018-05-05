@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
-import { GridDataResult } from '@progress/kendo-angular-grid';
+import { SortDescriptor, orderBy, State, process, composeSortDescriptors } from '@progress/kendo-data-query';
+import { GridDataResult, DataStateChangeEvent } from '@progress/kendo-angular-grid';
 /**
  * This component is the wrapper to a kengo grid component, but also add sorting, filtering and Front end paging.
  */
@@ -13,12 +13,25 @@ export class KendoGridWrapperComponent implements OnInit {
     @Input() gridData: any[];
     /** The column description of your data */
     @Input() columns: GridColumns[];
+    /** Indicates the grid height */
+    @Input() height = 410;
     /** This option allow to sort by more than one column */
     @Input() multiple = false;
     /** this option enable/disable the sort. Default is true. */
     @Input() allowUnsort = true;
+    /** The number of rows per page */
+    @Input() pageSize = 5;
+    /** Enable disable grouping default enabled */
+    @Input() groupable = true;
 
-    sort = new Array<SortDescriptor>();
+    state: State = {
+        skip: 0,
+        take: this.pageSize,
+        filter: {
+            logic: 'and',
+            filters: []
+        }
+    };
     gridView: GridDataResult;
     dataTypeOption = DataTypeOption;
 
@@ -28,16 +41,13 @@ export class KendoGridWrapperComponent implements OnInit {
         this.load();
     }
 
-    public sortChange(sort: SortDescriptor[]): void {
-        this.sort = sort;
-        this.load();
+    private load(): void {
+        this.gridView = process(this.gridData, this.state);
     }
 
-    private load(): void {
-        this.gridView = {
-            data: orderBy(this.gridData, this.sort),
-            total: this.gridData.length
-        };
+    public dataStateChange(state: DataStateChangeEvent): void {
+        this.state = state;
+        this.gridView = process(this.gridData, this.state);
     }
 }
 
@@ -66,6 +76,6 @@ export class GridColumns {
 export enum DataTypeOption {
     checkbox = 'checkbox',
     date = 'date',
-    string = 'string',
-    number = 'number'
+    string = 'text',
+    number = 'numeric'
 }
