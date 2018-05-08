@@ -1,23 +1,23 @@
-import { Component, OnInit, ViewChild, ComponentFactoryResolver, AfterViewInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
 
 import { AccountsService } from './accounts.service';
-import { AnchorNotesDirective } from './anchor-notes.directive';
-import { AppNotesComponent } from './app-notes.component';
-import { TrigerNotesResolverService } from './triger-notes-resolver.service';
+import { DataTypeOption, GridColumns, KendoGridWrapperComponent } from './kendo-grid/kendo-grid-wrapper.component';
 import { products } from './kendo-grid/products';
-import { GridColumns, DataTypeOption } from './kendo-grid/kendo-grid-wrapper.component';
+import { TrigerNotesResolverService } from './triger-notes-resolver.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
-  accounts: {name: string, status: string}[] = [];
-  @ViewChild(AnchorNotesDirective) appAnchorNotes: AnchorNotesDirective;
+export class AppComponent {
+  @ViewChild('grid') grid: KendoGridWrapperComponent;
 
   products: any[] = products;
   columns: GridColumns[];
+  pageable: boolean;
+  take = 5;
+  groupable: any;
 
   constructor(
     private accountsService: AccountsService,
@@ -69,22 +69,19 @@ export class AppComponent implements AfterViewInit {
         width: 160
       }
     ];
+
+    this.pageable = true;
+    this.groupable = false;
   }
 
-  ngAfterViewInit() {
-    this.accounts = this.accountsService.accounts;
-    this.trigerNotesResolver.finishDomModification.subscribe(() => {
-      this.loadNotes();
-    });
+  togglePageable() {
+    this.pageable = !this.pageable;
+    this.take = this.pageable ? 5 : 0;
+    this.grid.togglePageable.emit({pageable: this.pageable, take: this.take});
   }
 
-  loadNotes() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(AppNotesComponent);
-    const viewRefContainer = this.appAnchorNotes.viewContainerRef;
-
-    viewRefContainer.clear();
-
-    const componentRef = viewRefContainer.createComponent(componentFactory);
-    (<AppNotesComponent>componentRef.instance).name = 'some Name';
+  toggleGroupable() {
+    this.groupable = !this.groupable;
+    this.grid.toggleGroupable.emit(this.groupable);
   }
 }

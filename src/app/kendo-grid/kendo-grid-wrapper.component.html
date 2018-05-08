@@ -12,9 +12,13 @@
 [skip]="state.skip"
 [sort]="state.sort"
 [group]="state.group"
-[pageable]="true"
+[pageable]="pageable"
 [filterable]="true"
 [groupable]="groupable"
+[selectable]="{enable: true, checkboxOnly: false}"
+[kendoGridSelectBy]="gridSelection"
+[selectedKeys]="gridSelection"
+(selectionChange)="selectRow($event)" 
 (dataStateChange)="dataStateChange($event)"
 >
   <ng-template ngFor [ngForOf]="columns" let-column>

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { SortDescriptor, orderBy, State, process, composeSortDescriptors } from '@progress/kendo-data-query';
+import { Component, Input, OnInit, EventEmitter } from '@angular/core';
+import { SortDescriptor, orderBy, State, process, composeSortDescriptors, GroupDescriptor } from '@progress/kendo-data-query';
 import { GridDataResult, DataStateChangeEvent } from '@progress/kendo-angular-grid';
 /**
  * This component is the wrapper to a kengo grid component, but also add sorting, filtering and Front end paging.
@@ -21,8 +21,13 @@ export class KendoGridWrapperComponent implements OnInit {
     @Input() allowUnsort = true;
     /** The number of rows per page */
     @Input() pageSize = 5;
-    /** Enable disable grouping default enabled */
-    @Input() groupable = true;
+    /** Enable disable grouping default disabled */
+    @Input() groupable = false;
+    /** Enable disable pagination default enabled */
+    @Input() pageable = true;
+
+    togglePageable = new EventEmitter<{pageable: boolean, take: number}>();
+    toggleGroupable = new EventEmitter<boolean>();
 
     state: State = {
         skip: 0,
@@ -34,8 +39,38 @@ export class KendoGridWrapperComponent implements OnInit {
     };
     gridView: GridDataResult;
     dataTypeOption = DataTypeOption;
+    gridSelection = [0];
 
-    constructor() { }
+    constructor() {
+        this.togglePageable.subscribe((conf: {pageable: boolean, take: number}) => {
+            if (!conf.pageable) {
+                this.state = {
+                    sort: this.state.sort,
+                    filter: this.state.filter,
+                    group: this.state.group
+                };
+            } else {
+                this.state = {
+                    skip: 0,
+                    take: conf.take,
+                    sort: this.state.sort,
+                    filter: this.state.filter,
+                    group: this.state.group
+                };
+            }
+            this.load();
+        });
+        this.toggleGroupable.subscribe((groupable: boolean) => {
+            this.state = {
+                skip: this.state.skip,
+                take: this.state.take,
+                sort: this.state.sort,
+                filter: this.state.filter,
+                group: []
+            };
+            this.load();
+        });
+    }
 
     ngOnInit() {
         this.load();
@@ -48,6 +83,10 @@ export class KendoGridWrapperComponent implements OnInit {
     public dataStateChange(state: DataStateChangeEvent): void {
         this.state = state;
         this.gridView = process(this.gridData, this.state);
+    }
+
+    selectRow(event: any): void {
+        this.gridSelection = [event.index];
     }
 }
 
