@@ -17,6 +17,7 @@ import { TrigerNotesResolverService } from './triger-notes-resolver.service';
 import { KendoGridWrapperComponent } from './kendo-grid/kendo-grid-wrapper.component';
 import { IntlModule } from '@progress/kendo-angular-intl';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
     HttpModule,
     GridModule,
     IntlModule,
-    DateInputsModule
+    DateInputsModule,
+    DropDownsModule
   ],
   providers: [AccountsService, LoggingService, TrigerNotesResolverService],
   bootstrap: [AppComponent],

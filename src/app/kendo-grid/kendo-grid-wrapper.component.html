@@ -16,12 +16,13 @@
 [filterable]="true"
 [groupable]="groupable"
 [selectable]="{enable: true, checkboxOnly: false}"
-[kendoGridSelectBy]="gridSelection"
-[selectedKeys]="gridSelection"
+[kendoGridSelectBy]="gridSelected"
+[selectedKeys]="gridSelected"
 (selectionChange)="selectRow($event)" 
 (dataStateChange)="dataStateChange($event)"
 >
   <ng-template ngFor [ngForOf]="columns" let-column>
+    <!-- string and number columns -->
     <kendo-grid-column  
     *ngIf="column.dataType === dataTypeOption.string || column.dataType === dataTypeOption.number" 
     [field]="column.columnName" 
@@ -30,7 +31,7 @@
     [filter]="column.dataType"
     >
     </kendo-grid-column>
-
+    <!-- checkbox column -->
     <kendo-grid-column 
     *ngIf="column.dataType === dataTypeOption.checkbox" 
     [field]="column.columnName" 
@@ -42,7 +43,7 @@
         <input type="checkbox" [checked]="dataItem[column.columnName]" [disabled]="column.disabled" />
       </ng-template>
     </kendo-grid-column>
-
+    <!-- date columns -->
     <kendo-grid-column  
     *ngIf="column.dataType === dataTypeOption.date" 
     [field]="column.columnName" 
@@ -57,6 +58,63 @@
             ></kendo-datepicker>
         </ng-template>
     </kendo-grid-column>
-
+    <!-- DropDown Composed Columns -->
+    <kendo-grid-column
+    *ngIf="column.dataType === dataTypeOption.dropdown"
+    [field]="column.columnName" 
+    [title]="column.columnDisplay"
+    [width]="column.width"
+    [filter]="dataTypeOption.string"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+          <kendo-dropdownlist 
+          [data]="column.ddlData" 
+          [textField]="column.ddlTextField" 
+          [valueField]="column.ddlValueField"
+          [(ngModel)]="dataItem[column.columnName][column.ddlValueField]"
+          [disabled]="column.disabled"
+          (click)="ddlClicked($event)"
+          (valueChange)="ddlChange($event)"
+          [valuePrimitive]="true"
+          [popupSettings]="{width:540, height:200}">
+              <ng-template kendoDropDownListItemTemplate let-dataItem let-rowIndex="rowIndex">
+                  <span class="list-table">
+                    <span> {{ dataItem[column.ddlLongText] }} | </span>
+                    <span> {{ dataItem[column.ddlTextField] }} | </span>
+                    <span> {{ dataItem[column.ddlValueField]}}</span>
+                  </span>
+              </ng-template>
+            </kendo-dropdownlist>
+      </ng-template>
+    </kendo-grid-column>
+    <!-- DropDown Simple Columns -->
+    <kendo-grid-column
+    *ngIf="column.dataType === dataTypeOption.dropdownsimple"
+    [field]="column.columnName" 
+    [title]="column.columnDisplay"
+    [width]="column.width"
+    [filter]="dataTypeOption.string"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+          <kendo-dropdownlist 
+          [data]="column.ddlData" 
+          [textField]="column.ddlTextField" 
+          [valueField]="column.ddlValueField"
+          [(ngModel)]="dataItem[column.columnName]"
+          [disabled]="column.disabled"
+          (click)="ddlClicked($event)"
+          (valueChange)="ddlChange($event)"
+          [valuePrimitive]="true"
+          [popupSettings]="{width:540, height:200}">
+              <ng-template kendoDropDownListItemTemplate let-dataItem let-rowIndex="rowIndex">
+                  <span class="list-table">
+                    <span> {{ dataItem[column.ddlLongText] }} | </span>
+                    <span> {{ dataItem[column.ddlTextField] }} | </span>
+                    <span> {{ dataItem[column.ddlValueField]}}</span>
+                  </span>
+              </ng-template>
+            </kendo-dropdownlist>
+      </ng-template>
+    </kendo-grid-column>
   </ng-template>
 </kendo-grid>

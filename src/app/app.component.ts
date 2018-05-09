@@ -2,7 +2,7 @@ import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
 
 import { AccountsService } from './accounts.service';
 import { DataTypeOption, GridColumns, KendoGridWrapperComponent } from './kendo-grid/kendo-grid-wrapper.component';
-import { products } from './kendo-grid/products';
+import { products, categories } from './kendo-grid/products';
 import { TrigerNotesResolverService } from './triger-notes-resolver.service';
 
 @Component({
@@ -18,6 +18,7 @@ export class AppComponent {
   pageable: boolean;
   take = 5;
   groupable: any;
+  gridSelectedIndex = 0;
 
   constructor(
     private accountsService: AccountsService,
@@ -38,10 +39,14 @@ export class AppComponent {
         width: 250
       },
       {
-        columnName: 'Category.CategoryName',
+        columnName: 'Category',
         columnDisplay: 'Category',
-        dataType: DataTypeOption.string,
-        width: 80
+        dataType: DataTypeOption.dropdown,
+        width: 140,
+        ddlData: categories,
+        ddlValueField: 'CategoryID',
+        ddlTextField: 'CategoryName',
+        ddlLongText: 'Description'
       },
       {
         columnName: 'UnitPrice',
@@ -83,5 +88,9 @@ export class AppComponent {
   toggleGroupable() {
     this.groupable = !this.groupable;
     this.grid.toggleGroupable.emit(this.groupable);
+  }
+
+  selectedItemChange(event: any) {
+    console.log(event);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output, style } from '@angular/core';
 import { SortDescriptor, orderBy, State, process, composeSortDescriptors, GroupDescriptor } from '@progress/kendo-data-query';
 import { GridDataResult, DataStateChangeEvent } from '@progress/kendo-angular-grid';
 /**
@@ -6,7 +6,7 @@ import { GridDataResult, DataStateChangeEvent } from '@progress/kendo-angular-gr
  */
 @Component({
     selector: 'app-kendo-grid-wrapper',
-    templateUrl: 'kendo-grid-wrapper.component.html'
+    templateUrl: 'kendo-grid-wrapper.component.html',
 })
 export class KendoGridWrapperComponent implements OnInit {
     /** Your data array without process */
@@ -25,9 +25,19 @@ export class KendoGridWrapperComponent implements OnInit {
     @Input() groupable = false;
     /** Enable disable pagination default enabled */
     @Input() pageable = true;
+    /** Set the selected row by ROW INDEX */
+    @Output() selectedRowIndexChange = new EventEmitter<number>();
+    @Input() selectedRowIndex: number;
+    /** gives your the selected item */
+    @Output() selectedItem = new EventEmitter<any>();
+    /** in case your grid had dropdowns columns you can lisent the click with this event */
+    @Output() ddlClickedEmitter = new EventEmitter<any>();
+    /** in case your grid had dropdowns columns you can lisent the changes with this event */
+    @Output() ddlChangeEmitter = new EventEmitter<any>();
 
     togglePageable = new EventEmitter<{pageable: boolean, take: number}>();
     toggleGroupable = new EventEmitter<boolean>();
+    gridSelected = [0];
 
     state: State = {
         skip: 0,
@@ -39,7 +49,6 @@ export class KendoGridWrapperComponent implements OnInit {
     };
     gridView: GridDataResult;
     dataTypeOption = DataTypeOption;
-    gridSelection = [0];
 
     constructor() {
         this.togglePageable.subscribe((conf: {pageable: boolean, take: number}) => {
@@ -86,7 +95,18 @@ export class KendoGridWrapperComponent implements OnInit {
     }
 
     selectRow(event: any): void {
-        this.gridSelection = [event.index];
+        this.gridSelected = [event.index];
+        this.selectedRowIndexChange.emit(event.index);
+        this.selectedItem.emit(this.gridView.data[event.index]);
+    }
+
+    ddlClicked(event: any) {
+        this.ddlClickedEmitter.emit(event);
+    }
+
+    ddlChange(event: any) {
+        console.log(event);
+        this.ddlChangeEmitter.emit(event);
     }
 }
 
@@ -100,8 +120,18 @@ export class GridColumns {
     columnDisplay: string;
     /** Tells the data type of your column use this to get the correct view. */
     dataType: DataTypeOption;
+    /** Indicates in the column width in px */
     width: number;
+    /** makes disabled the field. In case  of date, checkbox or dropdown*/
     disabled?: boolean;
+    /** Provides the data for the dropdown only use in dropdown columns */
+    ddlData?: any[];
+    /** Indicates the name of the property in data, to take as value in the ddl when is collapsed */
+    ddlValueField?: string;
+    /** Indicates the name of the property in data, to show in the ddl when is collapsed */
+    ddlTextField?: string;
+    /** indicate the name of the property in data, to show when the ddl is poped up */
+    ddlLongText?: string;
 
     constructor() {
         this.columnDisplay = '';
@@ -109,12 +139,23 @@ export class GridColumns {
         this.dataType = DataTypeOption.string;
         this.disabled = false;
         this.width = 0;
+        this.ddlValueField = '';
+        this.ddlTextField = '';
+        this.ddlLongText = '';
     }
 }
-
+/** Helps to render your column with the correct configuration */
 export enum DataTypeOption {
+    /** use for booleans */
     checkbox = 'checkbox',
+    /** use for date objects  */
     date = 'date',
+    /** use for any string like */
     string = 'text',
-    number = 'numeric'
+    /** use for number */
+    number = 'numeric',
+    /** use for dropdown where the data is complex  column: {id: type, description: type} */
+    dropdown = 'dropdown',
+    /** use for dropdown where the data is just the key column: id */
+    dropdownsimple = 'dropdownsimple'
 }
