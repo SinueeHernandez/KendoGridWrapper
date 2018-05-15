@@ -1,18 +1,18 @@
 export const sampleProducts = [
     {
         'ProductID': 1,
-        'ProductName': 'Chai',
         'SupplierID': 1,
+        'ProductName': 'Chai',
         'CategoryID': 1,
-        'QuantityPerUnit': '10 boxes x 20 bags',
         'UnitPrice': 18,
-        'UnitsInStock': 39,
+        'QuantityPerUnit': '10 boxes x 20 bags',
         'UnitsOnOrder': 0,
+        'UnitsInStock': 39,
         'ReorderLevel': 10,
         'Discontinued': false,
         'Category': {
-            'CategoryID': 1,
             'CategoryName': 'Beverages',
+            'CategoryID': 1,
             'Description': 'Soft drinks, coffees, teas, beers, and ales'
         },
         'FirstOrderedOn': new Date(1996, 8, 20)
@@ -37,18 +37,18 @@ export const sampleProducts = [
     },
     {
         'ProductID': 3,
-        'ProductName': 'Aniseed Syrup',
         'SupplierID': 1,
         'CategoryID': 2,
         'QuantityPerUnit': '12 - 550 ml bottles',
+        'ProductName': 'Aniseed Syrup',
         'UnitPrice': 10,
-        'UnitsInStock': 13,
         'UnitsOnOrder': 70,
+        'UnitsInStock': 13,
         'ReorderLevel': 25,
         'Discontinued': false,
         'Category': {
-            'CategoryID': 2,
             'CategoryName': 'Condiments',
+            'CategoryID': 2,
             'Description': 'Sweet and savory sauces, relishes, spreads, and seasonings'
         },
         'FirstOrderedOn': new Date(1996, 8, 26)
@@ -73,36 +73,36 @@ export const sampleProducts = [
     },
     {
         'ProductID': 5,
-        'ProductName': 'Chef Antons Gumbo Mix',
         'SupplierID': 2,
+        'ProductName': 'Chef Antons Gumbo Mix',
         'CategoryID': 2,
-        'QuantityPerUnit': '36 boxes',
         'UnitPrice': 21.35,
+        'QuantityPerUnit': '36 boxes',
         'UnitsInStock': 0,
-        'UnitsOnOrder': 0,
         'ReorderLevel': 0,
+        'UnitsOnOrder': 0,
         'Discontinued': true,
         'Category': {
-            'CategoryID': 2,
             'CategoryName': 'Condiments',
+            'CategoryID': 2,
             'Description': 'Sweet and savory sauces, relishes, spreads, and seasonings'
         },
         'FirstOrderedOn': new Date(1996, 7, 17)
     },
     {
         'ProductID': 6,
-        'ProductName': 'Grandmas Boysenberry Spread',
         'SupplierID': 3,
+        'ProductName': 'Grandmas Boysenberry Spread',
         'CategoryID': 2,
-        'QuantityPerUnit': '12 - 8 oz jars',
         'UnitPrice': 25,
+        'QuantityPerUnit': '12 - 8 oz jars',
         'UnitsInStock': 120,
-        'UnitsOnOrder': 0,
         'ReorderLevel': 25,
+        'UnitsOnOrder': 0,
         'Discontinued': false,
         'Category': {
-            'CategoryID': 2,
             'CategoryName': 'Condiments',
+            'CategoryID': 2,
             'Description': 'Sweet and savory sauces, relishes, spreads, and seasonings'
         },
         'FirstOrderedOn': new Date(1996, 9, 19)
@@ -127,54 +127,54 @@ export const sampleProducts = [
     },
     {
         'ProductID': 8,
-        'ProductName': 'Northwoods Cranberry Sauce',
         'SupplierID': 3,
         'CategoryID': 2,
-        'QuantityPerUnit': '12 - 12 oz jars',
+        'ProductName': 'Northwoods Cranberry Sauce',
         'UnitPrice': 40,
         'UnitsInStock': 6,
+        'QuantityPerUnit': '12 - 12 oz jars',
         'UnitsOnOrder': 0,
         'ReorderLevel': 0,
         'Discontinued': false,
         'Category': {
-            'CategoryID': 2,
             'CategoryName': 'Condiments',
+            'CategoryID': 2,
             'Description': 'Sweet and savory sauces, relishes, spreads, and seasonings'
         },
         'FirstOrderedOn': new Date(1996, 11, 1)
     },
     {
         'ProductID': 9,
-        'ProductName': 'Mishi Kobe Niku',
         'SupplierID': 4,
         'CategoryID': 6,
         'QuantityPerUnit': '18 - 500 g pkgs.',
+        'ProductName': 'Mishi Kobe Niku',
         'UnitPrice': 97,
-        'UnitsInStock': 29,
         'UnitsOnOrder': 0,
         'ReorderLevel': 0,
         'Discontinued': true,
+        'UnitsInStock': 29,
         'Category': {
-            'CategoryID': 6,
             'CategoryName': 'Meat/Poultry',
+            'CategoryID': 6,
             'Description': 'Prepared meats'
         },
         'FirstOrderedOn': new Date(1997, 1, 21)
     },
     {
         'ProductID': 10,
-        'ProductName': 'Ikura',
         'SupplierID': 4,
         'CategoryID': 8,
         'QuantityPerUnit': '12 - 200 ml jars',
+        'ProductName': 'Ikura',
         'UnitPrice': 31,
-        'UnitsInStock': 31,
         'UnitsOnOrder': 0,
         'ReorderLevel': 0,
+        'UnitsInStock': 31,
         'Discontinued': false,
         'Category': {
-            'CategoryID': 8,
             'CategoryName': 'Seafood',
+            'CategoryID': 8,
             'Description': 'Seaweed and fish'
         },
         'FirstOrderedOn': new Date(1996, 8, 5)
