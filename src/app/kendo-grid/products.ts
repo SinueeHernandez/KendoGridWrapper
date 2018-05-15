@@ -114,7 +114,7 @@ export const sampleProducts = [
         'CategoryID': 7,
         'QuantityPerUnit': '12 - 1 1/2 lb pkgs.',
         'UnitPrice': 30,
-        'UnitsInStock': 15,
+        'UnitsInStock': 14,
         'UnitsOnOrder': 0,
         'ReorderLevel': 10,
         'Discontinued': false,
