@@ -54,14 +54,14 @@ export const sampleProducts = [
         'FirstOrderedOn': new Date(1996, 8, 26)
     },
     {
-        'ProductID': 4,
         'ProductName': 'Chef Antons Cajun Seasoning',
-        'SupplierID': 2,
+        'ProductID': 4,
         'CategoryID': 2,
+        'SupplierID': 2,
         'QuantityPerUnit': '48 - 6 oz jars',
         'UnitPrice': 22,
-        'UnitsInStock': 53,
         'UnitsOnOrder': 0,
+        'UnitsInStock': 53,
         'ReorderLevel': 0,
         'Discontinued': false,
         'Category': {
