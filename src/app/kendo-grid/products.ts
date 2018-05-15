@@ -15,7 +15,7 @@ export const sampleProducts = [
             'CategoryID': 1,
             'Description': 'Soft drinks, coffees, teas, beers, and ales'
         },
-        'FirstOrderedOn': new Date(1996, 8, 20)
+        'FirstOrderedOn': new Date(1997, 8, 20)
     },
     {
         'ProductID': 2,
@@ -109,8 +109,8 @@ export const sampleProducts = [
     },
     {
         'ProductID': 7,
-        'ProductName': 'Uncle Bobs Organic Dried Pears',
         'SupplierID': 3,
+        'ProductName': 'Uncle Bobs Organic Dried Pears',
         'CategoryID': 7,
         'QuantityPerUnit': '12 - 1 lb pkgs.',
         'UnitPrice': 30,
