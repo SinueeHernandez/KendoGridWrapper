@@ -19,18 +19,18 @@ export const sampleProducts = [
     },
     {
         'ProductID': 2,
-        'ProductName': 'Chang',
         'SupplierID': 1,
+        'ProductName': 'Chang',
         'CategoryID': 1,
-        'QuantityPerUnit': '24 - 12 oz bottles',
         'UnitPrice': 19,
         'UnitsInStock': 17,
-        'UnitsOnOrder': 40,
+        'QuantityPerUnit': '26 - 12 oz bottles',
+        'UnitsOnOrder': 42,
         'ReorderLevel': 25,
         'Discontinued': false,
         'Category': {
-            'CategoryID': 1,
             'CategoryName': 'Beverages',
+            'CategoryID': 1,
             'Description': 'Soft drinks, coffees, teas, beers, and ales'
         },
         'FirstOrderedOn': new Date(1996, 7, 12)
@@ -110,9 +110,9 @@ export const sampleProducts = [
     {
         'ProductID': 7,
         'SupplierID': 3,
-        'ProductName': 'Uncle Bobs Organic Dried Pears',
+        'ProductName': 'Uncle Bobs  Dried Pears',
         'CategoryID': 7,
-        'QuantityPerUnit': '12 - 1 lb pkgs.',
+        'QuantityPerUnit': '12 - 1 1/2 lb pkgs.',
         'UnitPrice': 30,
         'UnitsInStock': 15,
         'UnitsOnOrder': 0,
